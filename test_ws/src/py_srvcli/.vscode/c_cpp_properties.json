@@ -1,0 +1,56 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/bat20/Desktop/ROS2/test_ws/install/msg_srv_action_interface_example/include/**",
+        "/home/bat20/test_ws/install/turtlebot3_fake_node/include/**",
+        "/home/bat20/doosan_ws/install/velocity_controllers/include/**",
+        "/home/bat20/doosan_ws/install/gazebo_ros2_control/include/**",
+        "/home/bat20/doosan_ws/install/transmission_interface/include/**",
+        "/home/bat20/doosan_ws/install/test_robot_hardware/include/**",
+        "/home/bat20/doosan_ws/install/srdfdom/include/**",
+        "/home/bat20/doosan_ws/install/position_controllers/include/**",
+        "/home/bat20/doosan_ws/install/moveit_msgs/include/**",
+        "/home/bat20/doosan_ws/install/joint_trajectory_controller/include/**",
+        "/home/bat20/doosan_ws/install/joint_state_controller/include/**",
+        "/home/bat20/doosan_ws/install/joint_limits_interface/include/**",
+        "/home/bat20/doosan_ws/install/effort_controllers/include/**",
+        "/home/bat20/doosan_ws/install/forward_command_controller/include/**",
+        "/home/bat20/doosan_ws/install/diff_drive_controller/include/**",
+        "/home/bat20/doosan_ws/install/controller_manager/include/**",
+        "/home/bat20/doosan_ws/install/controller_interface/include/**",
+        "/home/bat20/doosan_ws/install/hardware_interface/include/**",
+        "/home/bat20/doosan_ws/install/geometric_shapes/include/**",
+        "/home/bat20/doosan_ws/install/dsr_msgs2/include/**",
+        "/home/bat20/doosan_ws/install/controller_manager_msgs/include/**",
+        "/home/bat20/test_ws/install/turtlebot3_gazebo/include/**",
+        "/home/bat20/uros_ws/install/micro_ros_agent/include/**",
+        "/home/bat20/uros_ws/install/micro_ros_msgs/include/**",
+        "/home/bat20/uros_ws/install/drive_base_msgs/include/**",
+        "/home/bat20/robot_ws/install/teb_local_planner/include/**",
+        "/home/bat20/robot_ws/install/teb_msgs/include/**",
+        "/home/bat20/robot_ws/install/moveit_visual_tools/include/**",
+        "/home/bat20/robot_ws/install/rviz_visual_tools/include/**",
+        "/home/bat20/robot_ws/install/laser_filters/include/**",
+        "/home/bat20/robot_ws/install/growth_meter/include/**",
+        "/home/bat20/robot_ws/install/dsr_msgs2/include/**",
+        "/home/bat20/robot_ws/install/costmap_converter/include/**",
+        "/home/bat20/robot_ws/install/costmap_converter_msgs/include/**",
+        "/opt/ros/foxy/include/**",
+        "/home/bat20/Desktop/ROS2/test_ws/src/ros2-seminar-examples/tf2_rclcpp_example/include/**",
+        "/home/bat20/Desktop/ROS2/test_ws/src/ros2-seminar-examples/topic_service_action_rclcpp_example/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

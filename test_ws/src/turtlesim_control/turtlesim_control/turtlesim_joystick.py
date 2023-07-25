@@ -61,20 +61,24 @@ class TurtlesimJoystick(Node):
 
     def pub_twist_msg(self):
         msg = Twist()
-        print('조종 중')
-        if self.LSTICK_UD >= 0.9:
-            msg.linear.x = 1.0          # 전진
-        elif self.LSTICK_UD <= -0.9:
-            msg.linear.x = -1.0         # 후진
-        elif self.LSTICK_LR >= 0.9:
-            msg.linear.y = 1.0          # 왼쪽 게걸음
-        elif self.LSTICK_LR <= -0.9:
-            msg.linear.y = -1.0         # 오른쪽 게걸음
-        elif self.RSTICK_LR >= 0.9:
-            msg.angular.z = 1.0         # 머리 왼쪽
-        elif self.RSTICK_LR <= -0.9:
-            msg.angular.z = -1.0        # 머리 오른쪽
-        self.twist_pub.publish(msg)
+        if self.LB_btn:
+            print('조종 중')
+            if self.LSTICK_UD >= 0.9:
+                msg.linear.x = 1.0          # 전진
+            elif self.LSTICK_UD <= -0.9:
+                msg.linear.x = -1.0         # 후진
+            elif self.LSTICK_LR >= 0.9:
+                msg.linear.y = 1.0          # 왼쪽 게걸음
+            elif self.LSTICK_LR <= -0.9:
+                msg.linear.y = -1.0         # 오른쪽 게걸음
+
+            if self.RSTICK_LR >= 0.9:
+                msg.angular.z = 1.0         # 머리 왼쪽
+            elif self.RSTICK_LR <= -0.9:
+                msg.angular.z = -1.0        # 머리 오른쪽
+            self.twist_pub.publish(msg)
+        else:
+            print('LB 버튼을 누르고 조작하세요')
 
 def main(args=None):
     rclpy.init(args=args)
