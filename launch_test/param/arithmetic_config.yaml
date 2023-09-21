@@ -1,0 +1,14 @@
+# 편리 네임스페이와 노드 이름이 변경되어도 사용 가능
+/**: # namespace and node name
+  ros__parameters:
+    qos_depth: 30
+    min_random_num: 0
+    max_random_num: 9
+
+# 정석
+# namespace:
+#   node_name:
+#     ros__parameters:
+#       test_a: 1
+#       test_b: 2
+#       test_c: 3
