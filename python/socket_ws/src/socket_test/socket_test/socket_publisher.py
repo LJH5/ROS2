@@ -10,7 +10,7 @@ class SocketPublisher(Node):
         super().__init__('socket_publisher')
         self.socket_pub_ = self.create_publisher(String, 'socket_topic', 10)
         self.my_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        host = '192.168.0.91'
+        host = 'localhost'
         port = 12345
         self.my_socket.bind((host, port))
         self.my_socket.listen(1)
@@ -21,7 +21,7 @@ class SocketPublisher(Node):
         self.i = 0
 
     def timer_callback(self):
-        data = self.conn.recv(1024).decode('utf-8')
+        data = self.conn.recv(1024).decode()
         msg = String()
         msg.data = data
         self.socket_pub_.publish(msg)
