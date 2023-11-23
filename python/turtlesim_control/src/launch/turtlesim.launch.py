@@ -12,12 +12,18 @@ import pathlib
 sys.path.append(str(pathlib.Path(__file__).parent.absolute()))
 
 def generate_launch_description():
-    
+
     return LaunchDescription([
+        DeclareLaunchArgument('turtlesim1', default_value='turtlesim_1', description=''),
         Node(
-            namespace= "turtlesim",
+            namespace= "turtlesim_1",
             package='turtlesim',
             executable='turtlesim_node',
-            output='screen'
+            output='screen',
+            parameters=[
+                {"background_r": 200},
+                {"background_g": 200},
+                {"background_b": 200},
+            ],
         ),
     ])
