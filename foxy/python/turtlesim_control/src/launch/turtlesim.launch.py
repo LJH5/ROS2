@@ -15,6 +15,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         DeclareLaunchArgument('turtlesim1', default_value='turtlesim_1', description=''),
+        
         Node(
             namespace= "turtlesim_1",
             package='turtlesim',
@@ -25,5 +26,8 @@ def generate_launch_description():
                 {"background_g": 200},
                 {"background_b": 200},
             ],
+            remappings=[
+                ("/turtlesim", "turtlesim1"),
+            ]
         ),
     ])

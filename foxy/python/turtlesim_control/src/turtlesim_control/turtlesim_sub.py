@@ -14,7 +14,7 @@ class TurtlesimSub(Node):
             Pose,
             '/turtle1/pose',
             self.listener_callback,
-            10)
+            qos_profile)
 
         self.x = 0
         self.y = 0

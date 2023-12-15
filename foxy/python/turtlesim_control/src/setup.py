@@ -26,6 +26,7 @@ setup(
             'turtlesim_pub = turtlesim_control.turtlesim_pub:main',
             'turtlesim_keyboard = turtlesim_control.turtlesim_keyboard:main',
             'turtlesim_joystick = turtlesim_control.turtlesim_joystick:main',
+            'python_keboard_input = turtlesim_control.python_keyboard_input:main',
         ],
     },
 )
