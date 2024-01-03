@@ -20,12 +20,21 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 
-#INSTALL
+# Build
+add_executable(lidar_filter src/conversion.cpp)
+ament_target_dependencies(lidar_filter rclcpp sensor_msgs)
+
+# Install
 install(DIRECTORY
   launch
   config
   DESTINATION share/${PROJECT_NAME}
 )
+
+install(TARGETS
+  lidar_filter
+  DESTINATION lib/${PROJECT_NAME})
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

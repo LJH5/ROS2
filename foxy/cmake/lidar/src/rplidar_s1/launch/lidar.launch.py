@@ -9,11 +9,11 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    serial_port = LaunchConfiguration("serial_port", default="/dev/ttyUSB0")
+    serial_port = LaunchConfiguration("serial_port", default="/dev/ttyUSB1")
     serial_baudrate = LaunchConfiguration("serial_baudrate", default="256000")
     frame_id = LaunchConfiguration("frame_id", default="laser")
     # 라이다 설치 상하 반전
-    inverted = LaunchConfiguration("inverted", default="false")
+    inverted = LaunchConfiguration("inverted", default="true")
     # 라이다 성능 향상, SLAM 사용 시 필수
     angle_compensate = LaunchConfiguration("angle_compensate", default="true")
 
