@@ -52,7 +52,7 @@ def generate_launch_description():
                          'frame_id': frame_id,
                          'inverted': inverted,
                          'angle_compensate': angle_compensate,
-                         'topic_name': '/scan1/unfiltered',
+                         'topic_name': '/scan1',
                          }],
             output='screen',
         ),
@@ -66,7 +66,7 @@ def generate_launch_description():
                     "config", "laser_filter.yaml",
                 ])],
             remappings=[
-                ('/scan', '/scan1/unfiltered'),
+                ('/scan', '/scan1'),
                 ('/scan_filtered', '/scan_1'),
                 ],
         ),
