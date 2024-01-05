@@ -14,7 +14,7 @@ public:
     {
         subscription_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
             "/scan", 10, std::bind(&LidarSubscriber::laserCallback, this, std::placeholders::_1));
-        publisher_ = this->create_publisher<sensor_msgs::msg::LaserScan>("filtered_lidar", 10)
+        publisher_ = this->create_publisher<sensor_msgs::msg::LaserScan>("filtered_lidar", 10);
     }
 
 private:

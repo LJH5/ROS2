@@ -21,7 +21,7 @@ find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 
 # Build
-add_executable(lidar_filter src/conversion.cpp)
+add_executable(lidar_filter src/lidar_filter.cpp)
 ament_target_dependencies(lidar_filter rclcpp sensor_msgs)
 
 # Install

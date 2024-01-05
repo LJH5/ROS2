@@ -9,7 +9,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    serial_port = LaunchConfiguration("serial_port", default="/dev/ttyUSB1")
+    serial_port = LaunchConfiguration("serial_port", default="/dev/ttyUSB0")
     serial_baudrate = LaunchConfiguration("serial_baudrate", default="256000")
     frame_id = LaunchConfiguration("frame_id", default="laser")
     # 라이다 설치 상하 반전
@@ -51,8 +51,10 @@ def generate_launch_description():
                          'serial_baudrate': serial_baudrate,
                          'frame_id': frame_id,
                          'inverted': inverted,
-                         'angle_compensate': angle_compensate}],
-            output='screen'
+                         'angle_compensate': angle_compensate,
+                         'topic_name': '/scan1/unfiltered',
+                         }],
+            output='screen',
         ),
 
         Node(
@@ -63,6 +65,10 @@ def generate_launch_description():
                     get_package_share_directory("rplidar_s1"),
                     "config", "laser_filter.yaml",
                 ])],
+            remappings=[
+                ('/scan', '/scan1/unfiltered'),
+                ('/scan_filtered', '/scan_1'),
+                ],
         ),
 
     ])
