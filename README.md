@@ -4,5 +4,5 @@
 ### ~ament_python, ament_cmack~
 ### ~topic, service, action~
 ### ~launch와 parameter, argument~
-### ~TF~
-### urdf(학습중)
+### TF(학습 중)
+### urdf(학습 중)
