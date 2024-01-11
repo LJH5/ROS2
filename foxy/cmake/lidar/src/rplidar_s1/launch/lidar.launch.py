@@ -9,51 +9,22 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    serial_port = LaunchConfiguration("serial_port", default="/dev/ttyUSB0")
-    serial_baudrate = LaunchConfiguration("serial_baudrate", default="256000")
-    frame_id = LaunchConfiguration("frame_id", default="laser")
-    # 라이다 설치 상하 반전
-    inverted = LaunchConfiguration("inverted", default="true")
-    # 라이다 성능 향상, SLAM 사용 시 필수
-    angle_compensate = LaunchConfiguration("angle_compensate", default="true")
+    lidar_param_dir = LaunchConfiguration(
+        'lidar_param_dir',
+        default=os.path.join(
+            get_package_share_directory('rplidar_s1'),
+            'param',
+            'lidar.yaml'
+        )
+    )
 
     return LaunchDescription([
-        DeclareLaunchArgument(
-            "serial_port",
-            default_value=serial_port,
-            description="lidar connected to usb"),
-
-        DeclareLaunchArgument(
-            "serial_baudrate",
-            default_value=serial_baudrate,
-            description="usb port baudrate"),
-
-        DeclareLaunchArgument(
-            "frame_id",
-            default_value=frame_id,
-            description="lidar's frame_id"),
-
-        DeclareLaunchArgument(
-            "inverted",
-            default_value=inverted,
-            description="Is the lidar mounted upside down"),
-
-        DeclareLaunchArgument(
-            "angle_compensate",
-            default_value=angle_compensate,
-            description="angle_compensate of scan data"),
 
         Node(
             package='rplidar_ros',
             executable='rplidar_composition',
             name='rplidar_scan_publisher',
-            parameters=[{'serial_port': serial_port,
-                         'serial_baudrate': serial_baudrate,
-                         'frame_id': frame_id,
-                         'inverted': inverted,
-                         'angle_compensate': angle_compensate,
-                         'topic_name': '/scan1',
-                         }],
+            parameters=[lidar_param_dir],
             output='screen',
         ),
 

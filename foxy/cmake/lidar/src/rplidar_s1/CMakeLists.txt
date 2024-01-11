@@ -26,8 +26,7 @@ ament_target_dependencies(lidar_filter rclcpp sensor_msgs)
 
 # Install
 install(DIRECTORY
-  launch
-  config
+  launch config param
   DESTINATION share/${PROJECT_NAME}
 )
 
