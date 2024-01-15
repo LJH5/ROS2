@@ -1,17 +1,3 @@
-// Copyright 2021 Open Source Robotics Foundation, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 #include <chrono>
 #include <functional>
 #include <memory>
@@ -38,22 +24,18 @@ public:
     // Declare and acquire `target_frame` parameter
     target_frame_ = this->declare_parameter<std::string>("target_frame", "turtle1");
 
-    tf_buffer_ =
-      std::make_unique<tf2_ros::Buffer>(this->get_clock());
-    tf_listener_ =
-      std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
+    tf_buffer_ = std::make_unique<tf2_ros::Buffer>(this->get_clock());
+    tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
 
     // Create a client to spawn a turtle
-    spawner_ =
-      this->create_client<turtlesim::srv::Spawn>("spawn");
+    spawner_ = this->create_client<turtlesim::srv::Spawn>("spawn");
 
     // Create turtle2 velocity publisher
-    publisher_ =
-      this->create_publisher<geometry_msgs::msg::Twist>("turtle2/cmd_vel", 1);
+    publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("turtle2/cmd_vel", 1);
 
     // Call on_timer function every second
     timer_ = this->create_wall_timer(
-      1s, [this]() {return this->on_timer();});
+      1s, std::bind(&FrameListener::on_timer, this));
   }
 
 private:
@@ -143,7 +125,8 @@ private:
 int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<FrameListener>());
+  auto node = std::make_shared<FrameListener>();
+  rclcpp::spin(node);
   rclcpp::shutdown();
   return 0;
 }

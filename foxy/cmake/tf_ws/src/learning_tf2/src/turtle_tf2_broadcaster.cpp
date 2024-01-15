@@ -17,7 +17,7 @@ public:
     FramePublisher()
         : Node("turtle_tf2_frame_publisher")
     {
-        auto qos_profile = rclcpp::Qos(rclcpp::KeepLast(10));
+        auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(10));
         // Declare and acquire `turtlename` parameter
         turtlename_ = this->declare_parameter<std::string>("turtlename", "turtle");
 
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 {
     rclcpp::init(argc, argv);
     auto node = std::make_shared<FramePublisher>();
-    rclcpp::spin();
+    rclcpp::spin(node);
     rclcpp::shutdown();
     return 0;
 }
