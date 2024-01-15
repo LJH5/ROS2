@@ -8,7 +8,7 @@
 class StaticFramePublisher : public rclcpp::Node
 {
 public:
-  StaticFramePublisher()
+  explicit StaticFramePublisher(char * transformation[])
   : Node("static_turtle_tf2_broadcaster")
   {
     tf_static_broadcaster_ = std::make_shared<tf2_ros::StaticTransformBroadcaster>(this);
@@ -18,7 +18,7 @@ public:
   }
 
 private:
-  void make_transforms()
+  void make_transforms(char * transformation[])
   {
     geometry_msgs::msg::TransformStamped t;
 
@@ -29,9 +29,7 @@ private:
     t.transform.translation.x = atof(transformation[2]);
     t.transform.translation.y = atof(transformation[3]);
     t.transform.translation.z = atof(transformation[4]);
-
     tf2::Quaternion q;
-
     q.setRPY(
       atof(transformation[5]),
       atof(transformation[6]),
@@ -64,7 +62,7 @@ int main(int argc, char * argv[])
   // necessary to check that the frame name passed is different
   if (strcmp(argv[1], "world") == 0) {
     RCLCPP_INFO(logger, "Your static turtle name cannot be 'world'");
-    return 2;
+    return 1;
   }
 
   // Pass parameters and initialize node
