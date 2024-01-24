@@ -35,7 +35,6 @@ install(TARGETS
 
 # 폴더 경로 등록
 install(DIRECTORY
-  include
   src
   DESTINATION share/${PROJECT_NAME})
 
