@@ -30,10 +30,13 @@ private:
     t.transform.translation.y = atof(transformation[3]);
     t.transform.translation.z = atof(transformation[4]);
     tf2::Quaternion q;
+    
+    // 오일러 -> 쿼터니언
     q.setRPY(
       atof(transformation[5]),
       atof(transformation[6]),
       atof(transformation[7]));
+
     t.transform.rotation.x = q.x();
     t.transform.rotation.y = q.y();
     t.transform.rotation.z = q.z();
