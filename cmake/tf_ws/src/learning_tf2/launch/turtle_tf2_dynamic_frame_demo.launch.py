@@ -18,7 +18,7 @@ def generate_launch_description():
         turtle_tf2_demo,
         Node(
             package='learning_tf2',
-            executable='fixed_frame_tf2_broadcaster',
-            name='fixed_broadcaster',
+            executable='dynamic_frame_tf2_broadcaster',
+            name='dynamic_broadcaster',
         ),
     ])
