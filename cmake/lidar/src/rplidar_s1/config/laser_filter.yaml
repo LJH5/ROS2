@@ -1,8 +1,0 @@
-/**: # namespace and node name
-  ros__parameters:
-    filter1:
-      name: angle
-      type: laser_filters/LaserScanAngularBoundsFilterInPlace
-      params:
-        lower_angle: -1.5708
-        upper_angle: 0.0

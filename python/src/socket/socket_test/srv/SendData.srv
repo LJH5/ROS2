@@ -1,5 +1,0 @@
-# request
-string data = '¾È³ç'
----
-# response
-string data = '±×·¡ ¾È³ç'

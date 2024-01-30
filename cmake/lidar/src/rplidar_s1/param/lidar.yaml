@@ -1,8 +1,0 @@
-/**: # namespace and node name
-  ros__parameters:
-    serial_port: "/dev/ttyUSB0"
-    serial_baudrate: 256000
-    frame_id: "laser"
-    inverted: true
-    angle_compensate: true
-    topic_name: "/scan1"
