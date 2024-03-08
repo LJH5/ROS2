@@ -12,8 +12,8 @@ class EcanClient(Node):
         super().__init__('ecan_client')
 
         # Client TCP connect
-        HOST = "192.168.100.120"
-        PORT = 4001
+        HOST = "127.0.0.1"
+        PORT = 9999
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client_socket.connect((HOST, PORT))
 
