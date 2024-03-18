@@ -7,7 +7,7 @@ import ZL_LIB
 
 
 # Client TCP connect
-HOST = ""
+HOST = "192.168.100.120"
 PORT = 4001
 TIMEOUT = 3
 TIMESLEEP = 0.5
@@ -31,29 +31,27 @@ def position_mode():
     init_ecan()
 
     # set profile postion
-    send_data(cob_id, "6060", "00", "2f", "0000", "0001")
+    send_data(cob_id, "6060", "00", "2f", "1")
 
-    time_set = 100
+    time_set = "100"
     # Set the motor Acceleration time
-    data_high, data_low = make_data_form(time_set)
     # left motor
-    send_data(cob_id, "6083", "01", "23", data_high, data_low)
+    send_data(cob_id, "6083", "01", "23", time_set)
     # right motor
-    send_data(cob_id, "6083", "02", "23", data_high, data_low)
+    send_data(cob_id, "6083", "02", "23", time_set)
 
     # Set the motor Deceleration time
     # left motor
-    send_data(cob_id, "6084", "01", "23", data_high, data_low)
+    send_data(cob_id, "6084", "01", "23", time_set)
     # right motor
-    send_data(cob_id, "6084", "02", "23", data_high, data_low)
+    send_data(cob_id, "6084", "02", "23", time_set)
 
     # Set the motor Maximum speed
-    speed = 60
-    data_high, data_low = make_data_form(speed)
+    speed = "60"
     # left motor
-    send_data(cob_id, "6081", "01", "23", data_high, data_low)
+    send_data(cob_id, "6081", "01", "23", speed)
     # right motor
-    send_data(cob_id, "6081", "02", "23", data_high, data_low)
+    send_data(cob_id, "6081", "02", "23", speed)
 
     # enable motor
     enable_motor()
@@ -62,15 +60,13 @@ def position_mode():
     l_pos = input("left position: ")
     r_pos = input("right position: ")
     # left motor
-    data_high, data_low = make_data_form(l_pos)
-    send_data(cob_id, "607a", "01", "23", data_high, data_low)
+    send_data(cob_id, "607a", "01", "23", l_pos)
     # right motor
-    data_high, data_low = make_data_form(r_pos)
-    send_data(cob_id, "607a", "02", "23", data_high, data_low)
+    send_data(cob_id, "607a", "02", "23", r_pos)
 
     # Start relative movement
-    send_data(cob_id, "6040", "00", "2b", "0000", "004f")
-    send_data(cob_id, "6040", "00", "2b", "0000", "005f")
+    send_data(cob_id, "6040", "00", "2b", "4f")
+    send_data(cob_id, "6040", "00", "2b", "5f")
 
 
 def velocity_mode():
@@ -89,10 +85,13 @@ def custom_mode():
     command = input("command: ")
     pass
 
-def send_data(cob_id, obj_idx, sub_idx, command, data_high, data_low):
+def send_data(cob_id, obj_idx, sub_idx, command, data):
     global ecan_type
     ecan_id = cob_id.zfill(8)
     global ecan_dlc
+    data = data.zfill(8)
+    data_high = data[:4]
+    data_low = data[4:]
 
     ecan_data = ecan_type + ecan_id + ecan_dlc + command + obj_idx[2:4] + obj_idx[0:2] + sub_idx + data_low[2:4] + data_low[:2] + data_high[2:4] + data_high[:2]
     print(f"sand: {ecan_data[:2]} {ecan_data[2:10]} {ecan_data[10:12]} {ecan_data[12:14]} {ecan_data[14:16]} {ecan_data[16:18]} {ecan_data[18:20]} {ecan_data[20:22]} {ecan_data[22:24]} {ecan_data[24:26]} {ecan_data[26:]}")
@@ -115,26 +114,23 @@ def recv_data():
         client_socket.close()
 
 def make_data_form(data):
-    data = str(hex(int(data)))[2:].zfill(8)
-    high = data[:4]
-    low = data[4:]
-    return high, low
+    return str(hex(int(data)))[2:].zfill(8)
 
 def enable_motor():
-    send_data("601", "6040", "00", "2b", "0000", "0006")
-    send_data("601", "6040", "00", "2b", "0000", "0007")
-    send_data("601", "6040", "00", "2b", "0000", "000f")
+    send_data("601", "6040", "00", "2b", "6")
+    send_data("601", "6040", "00", "2b", "7")
+    send_data("601", "6040", "00", "2b", "f")
 
 def init_ecan():
-    send_data("601", "6040", "00", "2b", "0000", "0000")
-    send_data("601", "6040", "00", "2b", "0000", "0006")
-    send_data("601", "6040", "00", "2b", "0000", "0007")
-    send_data("601", "6040", "00", "2b", "0000", "000f")
+    send_data("601", "6040", "00", "2b", "0")
+    send_data("601", "6040", "00", "2b", "6")
+    send_data("601", "6040", "00", "2b", "7")
+    send_data("601", "6040", "00", "2b", "f")
 
 while True:
     cmd = input(" 1. Position Mode\n 2. Velocity Mode\n 3. Torque Mode\n 4. Custom Mode\n 5. off\ncmd>>")
     if cmd == "5":
-        send_data("601", "6040", "00", "2b", "0000", "0000")
+        send_data("601", "6040", "00", "2b", "0")
     elif cmd == "4":
         custom_mode()
     else:
